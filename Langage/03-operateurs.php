@@ -40,3 +40,8 @@ var_dump($addition > 3); // false
 var_dump($addition >= 3); // true
 var_dump($addition < 3); // false
 var_dump($addition <= 3); // false
+
+// opérateur de concaténation
+// assembler 2 chaines de caractères
+
+$hello = "Bonjour je m'appelle " . $prenom;
