@@ -21,3 +21,36 @@ var_dump(false);
 
 // array -> tableau
 var_dump(['Romain', 'Eric']); // array
+
+
+// Conversion
+var_dump((bool) 'Hello');
+var_dump((boolean) 'Hello');
+
+var_dump((int) '123');
+var_dump((integer) '123');
+
+var_dump((string) 123);
+
+
+// String
+
+$lien = "<a href=\"https://formation.tech/\">C'est mon site</a>";
+$lien = '<a href="https://formation.tech/">C\'est mon site</a>';
+
+$site = 'https://formation.tech/';
+$libelle = "C'est mon site";
+
+$lien = <<<DELI
+<a href="https://formation.tech/">C'est mon site</a>
+DELI; // fin de ma chaine de char
+
+$lien = <<<DELI
+<a href="$site">$libelle</a>
+DELI; // fin de ma chaine de char
+
+$lien = <<<SQL
+SELECT *
+FROM contacts
+WHERE id = :id
+SQL;

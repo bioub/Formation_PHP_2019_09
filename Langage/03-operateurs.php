@@ -10,6 +10,7 @@
 $prenom = 'Romain';
 
 // opérateurs arithmétiques (math)
+// sur les nombres
 $addition = 1 + 2;
 $multiplication = 1 * 2;
 $soustraction = 1 - 2;

@@ -8,8 +8,9 @@ $nom = 'Bohdanowicz';
 // 2 - Créer une variable qui contient
 // votre nom complet à partir des
 // variables prénom et nom :
+// camelCase (commencer avec des majuscules à partir de 2e mot)
 $nomComplet = $prenom . ' ' . $nom;
-$nomComplet = "$prenom $nom";
+$nomComplet = "$prenom $nom\n";
 
 // 3 - La variable suivant contient un
 // nom aléatoire compris en 0 et 100 :
