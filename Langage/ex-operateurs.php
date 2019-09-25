@@ -41,14 +41,3 @@ $nb2 = $temp;
 
 echo "\n";
 
-
-// Optionnel
-
-// 8 - Créer un tableau avec 10 nombre aléatoires entre 0 et 100
-
-// 9 - Afficher le nombre de valeurs paires et impairs
-
-// 10 - Faire la somme de tous les éléments du tableau 
-
-// 11 - Créer une variable $nbAleaPair qui contient
-// un nombre aléatoire pair
