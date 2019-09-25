@@ -1,10 +1,12 @@
 <?php
 $users = [
     [
+        'id' => '123',
         'prenom' => 'Romain',
         'nom' => 'Bohdanowicz',
     ],
     [
+        'id' => '456',
         'prenom' => 'Michel',
         'nom' => 'Dupond',
     ],
@@ -25,7 +27,7 @@ $users = [
             <tr>
                 <td><?=$user['prenom']?> <?=$user['nom']?></td>
                 <td>
-                    <a href="user-details.php">Afficher</a>
+                    <a href="user-details.php?id=<?=$user['id']?>">Afficher</a>
                 </td>
             </tr>
             <?php endforeach; ?>

@@ -1,4 +1,10 @@
 <?php
+if (empty($_GET['id'])) {
+    header('HTTP/1.1 404 Not found');
+    echo 'Erreur 404';
+    exit;
+}
+
 $user = [
     'prenom' => 'Romain',
     'nom' => 'Bohdanowicz',
