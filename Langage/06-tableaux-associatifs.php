@@ -16,6 +16,7 @@ $user = [
 ];
 
 $nomComplet = $user['prenom'] . ' ' . $user['nom'] . "\n";
+$nomComplet = "$user[prenom] $user[nom]\n";
 
 foreach ($capitales as $pays => $ville) {
     echo "La capitale de $pays est $ville";
