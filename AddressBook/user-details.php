@@ -1,7 +1,7 @@
 <?php
 if (empty($_GET['id'])) {
     header('HTTP/1.1 404 Not found');
-    echo 'Erreur 404';
+    require_once './includes/404.php';
     exit;
 }
 
