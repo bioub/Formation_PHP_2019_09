@@ -5,12 +5,17 @@ if (empty($_GET['id'])) {
     exit;
 }
 
-$user = [
-    'prenom' => 'Romain',
-    'nom' => 'Bohdanowicz',
-    'email' => 'romain.bohdanowicz@gmail.com',
-    'telephone' => '',
-];
+require_once './includes/model.php';
+$link = dbConnect();
+$user = dbFetchUserById($link, $_GET['id']);
+
+if (!$user) {
+    header('HTTP/1.1 404 Not found');
+    require_once './includes/404.php';
+    exit;
+}
+
+dbClose($link);
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,9 +31,11 @@ $user = [
         <p>
             Nom : <?=$user['nom']?>
         </p>
+        <?php if (!empty($user['email'])) : ?>
         <p>
             Email : <?=$user['email']?>
         </p>
+        <?php endif; ?>
         <?php if (!empty($user['telephone'])) : ?>
         <p>
             Téléphone : <?=$user['telephone']?>

@@ -14,6 +14,24 @@ function dbFetchAllUsers($link) {
     return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
 
+function dbFetchUserById($link, $id) {
+    $sql = "SELECT * FROM user WHERE id = $id";
+    $result = mysqli_query($link, $sql);
+    return mysqli_fetch_assoc($result);
+}
+
+function dbInsertUser($link, $user) {
+    // $user['prenom']
+    $sql = <<<SQL
+INSERT INTO user (prenom, nom, email, telephone)
+VALUES ('$user[prenom]', '$user[nom]', '$user[email]', '$user[telephone]')
+SQL;
+    
+    mysqli_query($link, $sql);
+    
+    return mysqli_insert_id($link);
+}
+
 function dbClose($link) {
     mysqli_close($link);
 }

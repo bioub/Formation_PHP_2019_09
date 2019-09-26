@@ -6,10 +6,6 @@ if (isset(
     $_POST['telephone'],
    )) {
     // Le formulaire a été rempli
-    // TODO insérer en base de données
-    
-    // isset($errors) permet de savoir si $errors
-    
     $errors = [];
     
     if (empty($_POST['prenom'])) {
@@ -18,6 +14,27 @@ if (isset(
     
     if (empty($_POST['nom'])) {
         $errors['nom'] = 'Le nom est obligatoire';
+    }
+    
+    if (empty($errors)) {
+        require_once './includes/model.php';
+        $link = dbConnect();
+
+        $user = [
+            'prenom' => $_POST['prenom'],
+            'nom' => $_POST['nom'],
+            'email' => $_POST['email'],
+            'telephone' => $_POST['telephone'],
+        ];
+
+        $generatedId = dbInsertUser($link, $user);
+        dbClose($link);
+        
+        $urlDest = 'user-details.php?id=' . $generatedId;
+        
+        header('HTTP/1.1 302 Found');
+        header("Location: $urlDest");
+        exit;
     }
 }
 ?>
