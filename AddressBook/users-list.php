@@ -17,9 +17,9 @@ dbClose($link);
             <?php // mon commentaire ?>
             <?php foreach ($users as $user) : ?>
             <tr>
-                <td><?=$user['prenom']?> <?=$user['nom']?></td>
+                <td><?= htmlentities($user['prenom'])?> <?=htmlentities($user['nom'])?></td>
                 <td>
-                    <a href="user-details.php?id=<?=$user['id']?>">Afficher</a>
+                    <a href="user-details.php?id=<?=htmlentities($user['id'])?>">Afficher</a>
                 </td>
             </tr>
             <?php endforeach; ?>

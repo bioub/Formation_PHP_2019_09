@@ -8,7 +8,6 @@ if (empty($_GET['id'])) {
 require_once './includes/model.php';
 $link = dbConnect();
 $user = dbFetchUserById($link, $_GET['id']);
-
 if (!$user) {
     header('HTTP/1.1 404 Not found');
     require_once './includes/404.php';
@@ -26,19 +25,19 @@ dbClose($link);
     <body>
         <h2>Détails sur un utilisateur</h2>
         <p>
-            Prénom : <?=$user['prenom']?>
+            Prénom : <?=htmlentities($user['prenom'])?>
         </p>
         <p>
-            Nom : <?=$user['nom']?>
+            Nom : <?=htmlentities($user['nom'])?>
         </p>
         <?php if (!empty($user['email'])) : ?>
         <p>
-            Email : <?=$user['email']?>
+            Email : <?=htmlentities($user['email'])?>
         </p>
         <?php endif; ?>
         <?php if (!empty($user['telephone'])) : ?>
         <p>
-            Téléphone : <?=$user['telephone']?>
+            Téléphone : <?=htmlentities($user['telephone'])?>
         </p>
         <?php endif; ?>
     </body>
