@@ -51,6 +51,8 @@ if ($nbAlea < 10) {
 //    $motSupOuInf = 'inférieur ou égal';
 //}
 
+$pileOuFace = (mt_rand(0, 1) === 0) ? 'pile' : 'face';
+
 // ternaire
 $motSupOuInf = ($nbAlea > 50) ? 'supérieur' : 'inférieur ou égal';
         

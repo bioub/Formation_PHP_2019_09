@@ -29,6 +29,9 @@ if (isset(
     </head>
     <body>
         <h2>Créer un utilisateur</h2>
+        <?php if (!empty($errors)) : ?>
+            <p>Il y a des erreurs dans le formulaire</p>
+        <?php endif; ?>
         <form method="POST">
             <p>
                 Prénom :

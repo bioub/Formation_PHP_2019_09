@@ -1,16 +1,26 @@
 <?php
-$users = [
-    [
-        'id' => '123',
-        'prenom' => 'Romain',
-        'nom' => 'Bohdanowicz',
-    ],
-    [
-        'id' => '456',
-        'prenom' => 'Michel',
-        'nom' => 'Dupond',
-    ],
-];
+$host = 'localhost';
+$username = 'root';
+$passwd = '';
+$dbname = 'addressbook';
+$link = mysqli_connect($host, $username, $passwd, $dbname);
+
+if (!$link) {
+    // TODO ERREUR 500
+}
+
+$sql = "SELECT * FROM user";
+
+$result = mysqli_query($link, $sql);
+
+if (!$result) {
+    // TODO ERREUR 500
+}
+
+$users = mysqli_fetch_all($result, MYSQLI_ASSOC);
+var_dump($users);
+exit;
+mysqli_close($link);
 ?>
 <!DOCTYPE html>
 <html>

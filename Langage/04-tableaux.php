@@ -31,6 +31,12 @@ array_pop($prenoms);
 
 var_dump($prenoms);
 
+$i = 0;
+while ($i < count($prenoms)) {
+    $prenom = $prenoms[$i];
+    var_dump($prenom);
+    $i++;
+}
 
 for ($i = 0; $i < count($prenoms); $i++) {
     $prenom = $prenoms[$i];
