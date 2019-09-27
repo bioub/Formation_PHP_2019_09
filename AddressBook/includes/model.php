@@ -34,7 +34,7 @@ function dbFetchAllUsers($link) {
 //}
 function dbFetchUserById($link, $id) {
     $id = (int) $id;
-    $sql = "SELECT prenom, nom, email, telephone FROM user WHERE id = $id";
+    $sql = "SELECT prenom, nom, email, telephone, photo FROM user WHERE id = $id";
     $result = mysqli_query($link, $sql);
     return mysqli_fetch_array($result);
 }
@@ -72,10 +72,11 @@ function dbInsertUser($link, $user) {
     $user['nom'] = addslashes($user['nom']);
     $user['email'] = addslashes($user['email']);
     $user['telephone'] = addslashes($user['telephone']);
+    $user['photo'] = addslashes($user['photo']);
     $user['password'] = hashPassword($user['password'], $user['email']);
     $sql = <<<SQL
-INSERT INTO user (prenom, nom, email, telephone, password)
-VALUES ('$user[prenom]', '$user[nom]', '$user[email]', '$user[telephone]', '$user[password]')
+INSERT INTO user (prenom, nom, email, telephone, password, photo)
+VALUES ('$user[prenom]', '$user[nom]', '$user[email]', '$user[telephone]', '$user[password]', '$user[photo]')
 SQL;
 
     mysqli_query($link, $sql);

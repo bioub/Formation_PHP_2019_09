@@ -43,5 +43,10 @@ dbClose($link);
             Téléphone : <?=htmlentities($user['telephone'])?>
         </p>
         <?php endif; ?>
+        <?php if (!empty($user['photo'])) : ?>
+        <p>
+            Photo : <img src="photos/<?=htmlentities($user['photo'])?>"/>
+        </p>
+        <?php endif; ?>
     </body>
 </html>

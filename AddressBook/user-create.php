@@ -20,11 +20,33 @@ if (isset(
         $errors['nom'] = 'Le nom est obligatoire';
     }
     
+    if (!empty($_FILES['photo']['name'])) {
+        if ($_FILES['photo']['type'] !== 'image/jpeg') {
+            $errors['photo'] = 'La photo doit être au format JPG';
+        } else {
+            move_uploaded_file($_FILES['photo']['tmp_name'], 'photos/' . $_FILES['photo']['name']);
+            $img = imagecreatefromjpeg('photos/' . $_FILES['photo']['name']);
+            
+            $newLargeur = 200;
+            $imgvignette = imagescale($img, $newLargeur);
+            imagejpeg($imgvignette, 'photos/' . $_FILES['photo']['name']);
+            imagedestroy($imgvignette);
+            imagedestroy($img);
+        }
+    }
+    
     if (empty($errors)) {
         require_once './includes/model.php';
         $link = dbConnect();
 
-        $generatedId = dbInsertUser($link, $_POST);
+        $generatedId = dbInsertUser($link, [
+            'prenom' => $_POST['prenom'],
+            'nom' => $_POST['nom'],
+            'email' => $_POST['email'],
+            'telephone' => $_POST['telephone'],
+            'password' => $_POST['password'],
+            'photo' => $_FILES['photo']['name'],
+        ]);
         dbClose($link);
         
         $urlDest = 'user-details.php?id=' . $generatedId;
@@ -46,7 +68,7 @@ if (isset(
         <?php if (!empty($errors)) : ?>
             <p>Il y a des erreurs dans le formulaire</p>
         <?php endif; ?>
-        <form method="POST">
+        <form method="POST" enctype="multipart/form-data">
             <p>
                 Prénom :
                 <input type="text" name="prenom" value="<?=$_POST['prenom']??''?>">
@@ -72,6 +94,13 @@ if (isset(
             <p>
                 Mot de passe :
                 <input type="password" name="password" value="<?=$_POST['password']??''?>">
+            </p>
+            <p>
+                Photo (jpeg) :
+                <input type="file" name="photo">
+                <?php if (isset($errors['photo'])) : ?>
+                    <span><?=$errors['photo']?></span> 
+                <?php endif; ?>
             </p>
             <p>
                 <button>Ajouter</button>
