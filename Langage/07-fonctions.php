@@ -1,5 +1,4 @@
 <?php
-
 $hello = str_replace('jour', 'soir', 'bonjour');
 var_dump($hello); // bonsoir
 
@@ -19,8 +18,8 @@ function dump($val) {
 }
 
 var_dump(isset($val)); // false
-dump('Bonjour'); // $var = 'Bonjour';
-dump('Bonsoir'); // $var = 'Bonsoir';
+dump('Bonjour'); // $val = 'Bonjour';
+dump('Bonsoir'); // $val = 'Bonsoir';
 
 function addition($nb1, $nb2) {
     return $nb1 + $nb2;
