@@ -1,4 +1,7 @@
 <?php
+require_once './includes/session.php';
+checkConnectedOrRedirect();
+
 if (empty($_GET['id'])) {
     header('HTTP/1.1 404 Not found');
     require_once './includes/404.php';

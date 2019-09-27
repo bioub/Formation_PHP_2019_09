@@ -1,3 +1,7 @@
+<?php
+    require_once './includes/session.php';
+    checkConnectedOrRedirect();
+?>
 <!DOCTYPE html>
 <html>
     <head>

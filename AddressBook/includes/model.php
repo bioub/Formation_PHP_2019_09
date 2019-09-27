@@ -40,6 +40,7 @@ function dbFetchUserById($link, $id) {
 }
 
 function dbGetConnectedUser($link, $email, $password) {
+    $email = addslashes($email);
     $sql = "SELECT prenom, nom, email, telephone, password FROM user WHERE email = '$email'";
     $result = mysqli_query($link, $sql);
     $user = mysqli_fetch_array($result);

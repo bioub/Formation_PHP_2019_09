@@ -1,4 +1,7 @@
 <?php
+require_once './includes/session.php';
+checkConnectedOrRedirect();
+
 if (isset(
     $_POST['prenom'], 
     $_POST['nom'],

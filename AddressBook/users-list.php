@@ -1,4 +1,8 @@
 <?php
+// TODO à mettre dans une fonction
+require_once './includes/session.php';
+checkConnectedOrRedirect();
+    
 require_once './includes/model.php';
 $link = dbConnect();
 $users = dbFetchAllUsers($link);
