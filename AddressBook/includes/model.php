@@ -14,6 +14,8 @@ function dbFetchAllUsers($link) {
     return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
 
+
+
 //function dbFetchUserById($link, $id) {
 //    $sql = "SELECT prenom, nom, email, telephone FROM user WHERE id = ?";
 //    $stmt = mysqli_prepare($link, $sql);
@@ -37,18 +39,46 @@ function dbFetchUserById($link, $id) {
     return mysqli_fetch_array($result);
 }
 
+function dbGetConnectedUser($link, $email, $password) {
+    $sql = "SELECT prenom, nom, email, telephone, password FROM user WHERE email = '$email'";
+    $result = mysqli_query($link, $sql);
+    $user = mysqli_fetch_array($result);
+    
+    if (!$user) {
+        return null;
+    }
+    
+    $password = generatePasswordWithSalt($password, $email);
+    if (!password_verify($password, $user['password'])) {
+        return null;
+    }
+    
+    return $user;
+}
+
+function generatePasswordWithSalt($password, $email) {
+    $salt = 'gdfhgh("56651f455gf5df4g5df4df';
+    return $password . $salt . $email;
+}
+
+function hashPassword($password, $email) {
+    $password = generatePasswordWithSalt($password, $email);
+    return password_hash($password, PASSWORD_BCRYPT, ['cost' => 12]);
+}
+
 function dbInsertUser($link, $user) {
     $user['prenom'] = addslashes($user['prenom']);
     $user['nom'] = addslashes($user['nom']);
     $user['email'] = addslashes($user['email']);
     $user['telephone'] = addslashes($user['telephone']);
+    $user['password'] = hashPassword($user['password'], $user['email']);
     $sql = <<<SQL
-INSERT INTO user (prenom, nom, email, telephone)
-VALUES ('$user[prenom]', '$user[nom]', '$user[email]', '$user[telephone]')
+INSERT INTO user (prenom, nom, email, telephone, password)
+VALUES ('$user[prenom]', '$user[nom]', '$user[email]', '$user[telephone]', '$user[password]')
 SQL;
-    
+
     mysqli_query($link, $sql);
-    
+
     return mysqli_insert_id($link);
 }
 

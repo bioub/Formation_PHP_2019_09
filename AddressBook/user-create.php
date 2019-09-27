@@ -4,6 +4,7 @@ if (isset(
     $_POST['nom'],
     $_POST['email'],
     $_POST['telephone'],
+    $_POST['password'],
    )) {
     // Le formulaire a été rempli
     $errors = [];
@@ -20,14 +21,7 @@ if (isset(
         require_once './includes/model.php';
         $link = dbConnect();
 
-        $user = [
-            'prenom' => $_POST['prenom'],
-            'nom' => $_POST['nom'],
-            'email' => $_POST['email'],
-            'telephone' => $_POST['telephone'],
-        ];
-
-        $generatedId = dbInsertUser($link, $user);
+        $generatedId = dbInsertUser($link, $_POST);
         dbClose($link);
         
         $urlDest = 'user-details.php?id=' . $generatedId;
@@ -71,6 +65,10 @@ if (isset(
             <p>
                 Téléphone :
                 <input type="tel" name="telephone" value="<?=$_POST['telephone']??''?>">
+            </p>
+            <p>
+                Mot de passe :
+                <input type="password" name="password" value="<?=$_POST['password']??''?>">
             </p>
             <p>
                 <button>Ajouter</button>
